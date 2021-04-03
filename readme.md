@@ -3,10 +3,16 @@
 中文广告： 欢迎加入我们的QQ群下载模型及测试程序，qq群号：887298230
 
 
-## 编译状态
-Windows X64: [![Windows x64](https://github.com/znsoftm/RapidOCR/actions/workflows/windows-build.yml/badge.svg)](https://github.com/znsoftm/RapidOCR/actions/workflows/windows-build.yml)
 
-Linux x64: [![CMake](https://github.com/znsoftm/RapidOCR/actions/workflows/make-linux.yml/badge.svg)](https://github.com/znsoftm/RapidOCR/actions/workflows/make-linux.yml)
+## SDK 编译状态
+
+| 平台            | 编译状态 |   提供状态 |
+| --------------- | -------- | -------- |
+| Windows x86/x64 |  [![CMake-windows-x86-x64](https://github.com/RapidOCR/RapidOCR/actions/workflows/windows-all-build.yaml/badge.svg)](https://github.com/RapidOCR/RapidOCR/actions/workflows/windows-all-build.yaml)        |  右侧下载 |
+| Linux x64       |  [![CMake-linux](https://github.com/RapidOCR/RapidOCR/actions/workflows/make-linux.yml/badge.svg)](https://github.com/RapidOCR/RapidOCR/actions/workflows/make-linux.yml) |  暂不提供，自行编译 |
+
+
+
 ## 常见问题
  [FAQ](FAQ.md)
 
