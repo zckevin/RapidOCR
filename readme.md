@@ -18,7 +18,7 @@
 
 # 重要说明 
 
-转换工具已经更新，模型文件正在重建中。
+正在按照Python原版代码重写中
 
 ## 在线演示(online demo)：  http://rapidocr.51pda.cn:9003/
 
