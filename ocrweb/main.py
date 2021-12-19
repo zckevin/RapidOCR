@@ -35,8 +35,26 @@ def ocr():
         return detect_recognize(image)
 
 
+@app.route('/xuexi', methods=['POST', 'GET'])
+def ocr_xuexi():
+    if request.method == 'POST':
+        json_obj = request.get_json()
+        image = base64.b64decode(json_obj['file'])
+        nparr = np.frombuffer(image, np.uint8)
+        image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+        if image.ndim == 2:
+            image = cv2.cvtColor(image, cv2.COLOR_GRAY2BGR)
+
+        # hack here to speed up recognition for xuexiqiangguo:
+        # cut out the top 300px
+        image = image[300:, :]
+
+        xuexi_only = True
+        return detect_recognize(image, xuexi_only)
+
+
 if __name__ == '__main__':
-    app.run(host='127.0.0.1',
+    app.run(host='0.0.0.0',
             port=9003,
             debug=False,
             processes=True)

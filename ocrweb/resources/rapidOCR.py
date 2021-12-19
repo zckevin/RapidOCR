@@ -126,6 +126,8 @@ class TextSystem(object):
         if self.use_angle_cls:
             img_crop_list, _, cls_elapse = self.text_classifier(img_crop_list)
             print(f"cls num : {len(img_crop_list)}, elapse: {cls_elapse}")
+        else:
+            cls_elapse = 0
 
         rec_res, rec_elapse = self.text_recognizer(img_crop_list)
         print(f"rec_res num: {len(rec_res)}, elapse: {rec_elapse}")

@@ -16,15 +16,22 @@ from resources.rapidOCR import TextSystem, draw_text_det_res, check_and_read_gif
 
 det_model_path = 'resources/models/ch_PP-OCRv2_det_infer.onnx'
 cls_model_path = 'resources/models/ch_ppocr_mobile_v2.0_cls_infer.onnx'
-rec_model_path = 'resources/models/ch_ppocr_mobile_v2.0_rec_infer.onnx'
+rec_model_path = 'resources/models/ch_PP-OCRv2_rec_infer.onnx'
 
 text_sys = TextSystem(det_model_path,
+                      rec_model_path,
+                      use_angle_cls=False,
+                      cls_model_path=cls_model_path)
+
+
+def detect_recognize(image_path, xuexi_only=False):
+    global text_sys
+    if not xuexi_only:
+        text_sys = TextSystem(det_model_path,
                       rec_model_path,
                       use_angle_cls=True,
                       cls_model_path=cls_model_path)
 
-
-def detect_recognize(image_path):
     if isinstance(image_path, str):
         image = cv2.imread(image_path)
     elif isinstance(image_path, np.ndarray):
@@ -52,13 +59,17 @@ def detect_recognize(image_path):
                                   indent=2,
                                   ensure_ascii=False)
 
-        det_im = draw_text_det_res(dt_boxes, img)
-        image = cv2.imencode('.jpg', det_im)[1]
-        img = str(base64.b64encode(image))[2:-1]
+        if not xuexi_only:
+            det_im = draw_text_det_res(dt_boxes, img)
+            image = cv2.imencode('.jpg', det_im)[1]
+            img = str(base64.b64encode(image))[2:-1]
+        else:
+            img = ""
 
         elapse = reduce(lambda x, y: float(x)+float(y), elapse_part)
         elapse_part = ','.join([str(x) for x in elapse_part])
     return json.dumps({'image': img,
                        'total_elapse': f'{elapse:.4f}',
                        'elapse_part': elapse_part,
-                       'rec_res': rec_res_data})
+                       'rec_res': rec_res_data,
+                       'boxes': [box.tolist() for box in dt_boxes]})
