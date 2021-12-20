@@ -45,9 +45,9 @@ def ocr_xuexi():
         if image.ndim == 2:
             image = cv2.cvtColor(image, cv2.COLOR_GRAY2BGR)
 
-        # hack here to speed up recognition for xuexiqiangguo:
-        # cut out the top 300px
-        image = image[300:, :]
+        # cut out the question widget to speed up recognition for xuexiqiangguo
+        box = json_obj['box']
+        image = image[box['top']:box['bottom'], box['left']:box['right']]
 
         xuexi_only = True
         return detect_recognize(image, xuexi_only)
