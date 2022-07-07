@@ -1,5 +1,5 @@
 onnxruntime
-opencv_python==4.5.1.48
+opencv-python-headless==4.5.3.56
 six==1.15.0
 pyclipper==1.2.1
 numpy
